@@ -5,6 +5,7 @@ import { AnimatedGridMap } from './components/AnimatedGridMap';
 import { HeroSection } from './components/HeroSection';
 import { SimulationDashboard } from './components/SimulationDashboard';
 import { PerformanceAnalytics } from './components/PerformanceAnalytics';
+import { CustomCursor } from './components/CustomCursor';
 
 export type ViewState = 'landing' | 'dashboard' | 'analytics';
 
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <div style={{ position: 'relative', width: '100%', minHeight: '100vh', overflow: 'hidden' }}>
+      <CustomCursor />
       {/* Background Layers - these persist across views */}
       <ParticleBackground />
       {view === 'landing' && <AnimatedGridMap />}

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { FitnessChart } from './FitnessChart';
 import { EnergyChart } from './EnergyChart';
@@ -12,6 +13,11 @@ interface PerformanceAnalyticsProps {
 
 export const PerformanceAnalytics = ({ onBack }: PerformanceAnalyticsProps) => {
     const { comparisonStats } = useSimulation();
+
+    const panelVariants: Variants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    };
 
     return (
         <motion.div
@@ -35,20 +41,40 @@ export const PerformanceAnalytics = ({ onBack }: PerformanceAnalyticsProps) => {
             </header>
 
             <div className="analytics-grid">
-                <div className="chart-panel glass-panel">
+                <motion.div
+                    className="chart-panel glass-panel"
+                    variants={panelVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                >
                     <h3 className="neon-text-blue">GA Cost Evolution</h3>
                     <FitnessChart data={comparisonStats} />
-                </div>
+                </motion.div>
 
-                <div className="chart-panel glass-panel">
+                <motion.div
+                    className="chart-panel glass-panel"
+                    variants={panelVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: 0.2 }}
+                >
                     <h3 className="neon-text-blue">Energy Consumption (kJ)</h3>
                     <EnergyChart data={comparisonStats} />
-                </div>
+                </motion.div>
 
-                <div className="table-panel glass-panel">
+                <motion.div
+                    className="table-panel glass-panel"
+                    variants={panelVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: 0.4 }}
+                >
                     <h3 className="neon-text-blue">Algorithm Comparison</h3>
                     <ComparisonTable data={comparisonStats} />
-                </div>
+                </motion.div>
             </div>
         </motion.div>
     );

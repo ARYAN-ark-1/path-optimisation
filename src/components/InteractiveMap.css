@@ -1,0 +1,207 @@
+.interactive-map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    cursor: grab;
+    background: #ffffff;
+}
+
+.map-content {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    transform-origin: center center;
+    touch-action: none;
+    /* Required for pointer events */
+}
+
+.zoom-controls {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10;
+    background: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.control-hint {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.algorithm-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.algo-btn {
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.algo-btn.active {
+    background: var(--neon-blue);
+    border-color: var(--neon-blue);
+    color: #fff;
+    box-shadow: 0 4px 6px -1px var(--neon-blue-glow);
+}
+
+/* Base grid pattern - layer 1 static */
+.map-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.map-grid-overlay.layer-1 {
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Layer 2 scrolling grid */
+.map-grid-overlay.layer-2 {
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 200px 200px;
+}
+
+@keyframes gridScroll {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(200px);
+    }
+}
+
+/* Light Streaks */
+.light-streak {
+    display: none;
+}
+
+.map-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    overflow: visible;
+    pointer-events: none;
+    /* Let drag events pass through to map-content */
+}
+
+/* Obstacles */
+.obstacle-rect {
+    fill: #fef2f2;
+    stroke: #ef4444;
+    stroke-width: 1.5;
+    rx: 4px;
+    transition: all 0.2s ease;
+}
+
+.obstacle-rect.premium-glow {
+    filter: none;
+}
+
+.obstacle-rect:hover {
+    fill: #fee2e2;
+}
+
+/* Node Markers */
+.node-marker {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    transform: translate(-16px, -16px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: var(--font-display);
+    color: #fff;
+    z-index: 4;
+}
+
+.node-marker.start {
+    background: #10b981;
+    border: 2px solid #059669;
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+}
+
+.node-marker.goal {
+    background: #3b82f6;
+    border: 2px solid #2563eb;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid inherit;
+    animation: node-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes node-ping {
+
+    75%,
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Drones */
+.drone-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    /* Centering adjustment for offsetPath */
+    margin-top: -16px;
+    margin-left: -16px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drone-aura {
+    display: none;
+}
+
+.drone-nav-icon {
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}

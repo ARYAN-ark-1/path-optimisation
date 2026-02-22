@@ -1,0 +1,183 @@
+.grid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Perspective wrapper for 3D effect */
+.map-perspective {
+    perspective: 1000px;
+}
+
+.grid-plane {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+
+    /* Create the grid pattern using linear gradients */
+    background-image:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
+
+    /* Tilt the plane in 3D space */
+    transform: rotateX(60deg) translateY(-100px) translateZ(-200px);
+
+    /* Animate the grid to look like moving forward */
+    animation: planeMove 10s linear infinite;
+
+    /* Radial gradient mask to fade grid at edges */
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 60%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+@keyframes planeMove {
+    0% {
+        transform: rotateX(60deg) translateY(0) translateZ(-200px);
+    }
+
+    100% {
+        transform: rotateX(60deg) translateY(50px) translateZ(-200px);
+    }
+}
+
+.radar-scanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    margin-top: -300px;
+    margin-left: -300px;
+    border-radius: 50%;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    /* Harness blue subtle */
+    box-shadow: 0 0 100px rgba(37, 99, 235, 0.05) inset;
+    transform-origin: center;
+
+    /* The sweep gradient */
+    background: conic-gradient(from 0deg,
+            transparent 70%,
+            rgba(37, 99, 235, 0.05) 90%,
+            rgba(37, 99, 235, 0.15) 100%);
+
+    animation: radarSpin 4s linear infinite;
+}
+
+@keyframes radarSpin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Drone Icon styling */
+.drone-icon-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    margin-top: -32px;
+    margin-left: -32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 0 4px 6px -1px var(--neon-blue-glow);
+    z-index: 10;
+}
+
+.drone-icon {
+    animation: float 3s ease-in-out infinite;
+}
+
+.drone-trail {
+    position: absolute;
+    top: -68px;
+    left: -68px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.drone-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid var(--neon-blue);
+    opacity: 0;
+}
+
+.ring-1 {
+    width: 100px;
+    height: 100px;
+    animation: pulseOut 2s cubic-bezier(0.21, 0.53, 0.56, 0.8) infinite;
+}
+
+.ring-2 {
+    width: 150px;
+    height: 150px;
+    animation: pulseOut 2s cubic-bezier(0.21, 0.53, 0.56, 0.8) infinite 1s;
+}
+
+@keyframes pulseOut {
+    0% {
+        width: 64px;
+        height: 64px;
+        opacity: 0.8;
+    }
+
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* Grid Corners */
+.grid-marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neon-blue);
+    opacity: 0.5;
+}
+
+.grid-marker.top-left {
+    top: 10%;
+    left: 10%;
+    border-right: none;
+    border-bottom: none;
+}
+
+.grid-marker.top-right {
+    top: 10%;
+    right: 10%;
+    border-left: none;
+    border-bottom: none;
+}
+
+.grid-marker.bottom-left {
+    bottom: 10%;
+    left: 10%;
+    border-right: none;
+    border-top: none;
+}
+
+.grid-marker.bottom-right {
+    bottom: 10%;
+    right: 10%;
+    border-left: none;
+    border-top: none;
+}

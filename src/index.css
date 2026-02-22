@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap');
+
+:root {
+  /* Core Colors - Clean Professional SaaS */
+  --bg-dark: #f8fafc;
+  /* Very light slate background */
+  --bg-panel: #ffffff;
+  /* pure white panels */
+  --neon-blue: #2563eb;
+  /* Strong Harness Blue */
+  --neon-blue-glow: rgba(37, 99, 235, 0.1);
+  /* Subtle blue tint */
+  --electric-purple: #7c3aed;
+  /* Professional Purple */
+  --electric-purple-glow: rgba(124, 58, 237, 0.1);
+  --text-primary: #0f172a;
+  /* Slate 900 for dark text */
+  --text-secondary: #64748b;
+  /* Slate 500 for secondary text */
+  --accent-cyan: #0ea5e9;
+  --grid-color: rgba(15, 23, 42, 0.05);
+
+  /* Modern Card Styling */
+  --glass-border: #e2e8f0;
+  /* Slate 200 border */
+  --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  /* Subtle drop shadow */
+  --glass-blur: none;
+
+  /* Fonts */
+  --font-primary: 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  touch-action: none;
+}
+
+/* Typography Utilities */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Utility Classes */
+.glass-panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  /* Sharper, professional corners */
+  box-shadow: var(--glass-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-panel::before {
+  display: none;
+  /* Removed neon top border */
+}
+
+.neon-text-blue {
+  color: var(--neon-blue);
+  font-weight: 600;
+}
+
+.neon-text-purple {
+  color: var(--electric-purple);
+  font-weight: 600;
+}
+
+.text-gradient {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Base animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+
+  /* Much more subtle float for pro UI */
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 rgba(37, 99, 235, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom Scrollbar - Light Mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  /* Slate 300 */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  /* Slate 400 */
+}

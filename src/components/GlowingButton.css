@@ -1,0 +1,46 @@
+.glowing-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-family: var(--font-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: #ffffff;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: var(--glass-shadow);
+    z-index: 1;
+}
+
+.glowing-btn.primary {
+    background: var(--neon-blue);
+    color: #ffffff;
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 4px 6px -1px var(--neon-blue-glow);
+}
+
+.glowing-btn.primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Sci-fi border animation effects disabled for light theme */
+.btn-border {
+    display: none;
+}
